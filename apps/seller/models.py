@@ -1,7 +1,7 @@
 from django.db import models
 from django.urls import reverse
-from django.utils.text import slugify
 
+from backend.utils import generate_slug
 from ordered_model.models import OrderedModel
 from apps.seller.states import CITIES_CHOICES, STATES_CHOICES
 
@@ -13,7 +13,7 @@ class Seller(models.Model):
     slug = models.SlugField(max_length=510, unique=True, blank=True)
 
     state = models.CharField(max_length=255, choices=STATES_CHOICES)
-    city = models.CharField(max_length=255, choices=CITIES_CHOICES, null=True, blank=True)
+    city = models.CharField(max_length=255, choices=CITIES_CHOICES, null=True, blank=True, db_default=None)
 
     added_on = models.DateTimeField(auto_now_add=True)
     managed_by = models.ForeignKey('user.User', on_delete=models.CASCADE, related_name='sellers')
@@ -23,7 +23,7 @@ class Seller(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.slug:
-            self.slug = slugify(self.name)[:510]
+            self.slug = generate_slug(self.name)
         super().save(*args, **kwargs)
 
     def __str__(self) -> str:

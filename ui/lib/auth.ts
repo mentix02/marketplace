@@ -7,6 +7,7 @@ import { betterAuth, BetterAuthOptions } from "better-auth";
 // Plugins
 import { admin } from "better-auth/plugins";
 import { nextCookies } from "better-auth/next-js";
+import { headers as NextHeaders } from "next/headers";
 import { jwt, customSession } from "better-auth/plugins";
 
 import { sendVerificationEmail, sendResetPasswordEmail } from "@/lib/communication";
@@ -140,5 +141,9 @@ export const auth = betterAuth({
     }, betterAuthOptions),
   ],
 });
+
+export async function getBearerToken() {
+  return (await auth.api.getToken({ headers: await NextHeaders() })).token;
+}
 
 export type Session = typeof auth.$Infer.Session;

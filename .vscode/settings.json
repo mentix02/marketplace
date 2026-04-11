@@ -1,0 +1,15 @@
+{
+    "python-envs.defaultEnvManager": "ms-python.python:pyenv",
+    "python-envs.pythonProjects": [],
+    "[python]": {
+        "diffEditor.ignoreTrimWhitespace": false,
+        "editor.defaultColorDecorators": "never",
+        "gitlens.codeLens.symbolScopes": [
+            "!Module"
+        ],
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "ms-python.black-formatter",
+        "editor.wordBasedSuggestions": "off",
+    },
+    "black-formatter.args": ["-S", "-l 120"]
+}

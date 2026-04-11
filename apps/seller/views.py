@@ -1,8 +1,14 @@
+from rest_framework.permissions import IsAdminUser
 from rest_framework.generics import RetrieveAPIView, ListCreateAPIView
 
-from apps.seller.models import Seller
 from apps.user.permissions import IsAdminOrReadOnly
-from apps.seller.serializers import SellerListSerializer, SellerCreateSerializer, SellerDetailSerializer
+from apps.seller.models import Seller, SellerPageText
+from apps.seller.serializers import (
+    SellerListSerializer,
+    SellerCreateSerializer,
+    SellerDetailSerializer,
+    SellerPageTextSerializer,
+)
 
 
 class SellerListCreateAPIView(ListCreateAPIView):
@@ -29,3 +35,16 @@ class SellerRetrieveAPIView(RetrieveAPIView):
     lookup_url_kwarg = 'slug'
     serializer_class = SellerDetailSerializer
     queryset = Seller.objects.prefetch_related('texts').all()
+
+
+class SellerTextsListCreateAPIView(ListCreateAPIView):
+
+    name = 'Seller Texts List Create API'
+
+    permission_classes = (IsAdminUser,)
+    serializer_class = SellerPageTextSerializer
+    queryset = SellerPageText.objects.all().order_by('order')
+
+    def get_queryset(self):
+        slug: str = self.kwargs['slug']
+        return self.queryset.filter(seller__slug=slug)

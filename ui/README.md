@@ -1,16 +1,19 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Marketplace UI
+
+This is the frontend of a marketplace web app that's made to put Indian artisans on the
+global stage. We provide them with a platform to sell their products to a global audience.
+Each artisan has a seller page with a bunch of interesting text and images and a list of
+products they have for sale. We offer global shipping and payment processing.
+
+This UI uses shadcn and tailwindcss. It uses the app router with Next.js 16. We use
+Better-Auth for auth management. The backend API is powered by Django & DRF and can be
+accessed by `NEXT_PUBLIC_BACKEND_URL`.
 
 ## Getting Started
 
 First, run the development server:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
 bun dev
 ```
 
@@ -31,6 +34,4 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 
 ## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Check out the [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.

@@ -45,6 +45,9 @@ LOCAL_APPS = [
 
 INSTALLED_APPS = DEFAULT_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
+if DEBUG:
+    INSTALLED_APPS += ['debug_toolbar']
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -54,6 +57,9 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+if DEBUG:
+    MIDDLEWARE.insert(1, 'debug_toolbar.middleware.DebugToolbarMiddleware')
 
 ROOT_URLCONF = 'backend.urls'
 
@@ -99,6 +105,8 @@ STORAGES = {
     },
 }
 
+DEFAULT_SLUG_SIZE = 510
+
 AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
     {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
@@ -127,6 +135,8 @@ USE_I18N = True
 USE_TZ = True
 
 STATIC_URL = 'static/'
+
+INTERNAL_IPS = ['127.0.0.1']
 
 # REST Framework Configuration
 
